@@ -1,0 +1,6 @@
+{
+  "name": "tower-instapoll-alert-tests",
+  "private": true,
+  "scripts": { "test": "node test-page-scope.js && node test-quiz-safety.js && node test-hook.js && node test-content.js && node test-auto-click.js && node test-auto-submit.js && node test-auto-answer-toggle.js && node test-auto-dismiss.js && node test-notifications.js" },
+  "devDependencies": { "jsdom": "^24.1.3" }
+}

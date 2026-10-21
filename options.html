@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tower Instapoll Alert</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1a1a1a; --muted: #5c5c5c; --bg: #fff; --line: #e3e3e3; --accent: #bf5700; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #ececec; --muted: #a0a0a0; --bg: #1c1c1e; --line: #343438; --accent: #ff8a3d; }
+  }
+  body { margin: 0; padding: 28px 30px 34px; background: var(--bg); color: var(--fg);
+         font: 14px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 560px; }
+  h1 { font-size: 17px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  p.lede { margin: 0 0 22px; color: var(--muted); }
+  fieldset { border: 0; border-top: 1px solid var(--line); margin: 0 0 4px; padding: 16px 0 4px; }
+  legend { padding: 0 8px 0 0; font-weight: 600; font-size: 12px; text-transform: uppercase;
+           letter-spacing: 0.06em; color: var(--muted); }
+  label { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; cursor: pointer; }
+  input[type=checkbox] { margin: 3px 0 0; accent-color: var(--accent); width: 15px; height: 15px; flex: none; }
+  .label-text { display: block; }
+  .hint { display: block; color: var(--muted); font-size: 12.5px; }
+  footer { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line);
+           display: flex; align-items: center; gap: 14px; }
+  button { font: inherit; padding: 7px 14px; border-radius: 7px; border: 1px solid var(--line);
+           background: transparent; color: var(--fg); cursor: pointer; }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button:disabled { opacity: 0.6; cursor: wait; }
+  #status { color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+  <h1>Tower Instapoll Alert</h1>
+  <p class="lede">Alerts fire the instant a poll is pushed to your Tower tab, whether or not that tab is in front.</p>
+  <p class="lede">When answering is on, a random available poll option is selected 1.5 seconds after the poll appears, followed by its Submit button when present and enabled.</p>
+
+  <fieldset>
+    <legend>Answering</legend>
+    <label><input type="checkbox" id="autoAnswer"><span class="label-text">Answer polls automatically
+      <span class="hint">Off means the extension only alerts you and never clicks anything. Takes effect at once, including on a poll already on screen.</span></span></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Alerts</legend>
+    <label><input type="checkbox" id="notify"><span class="label-text">Desktop notification
+      <span class="hint">Works when the tab is backgrounded or the browser is minimised.</span></span></label>
+    <label><input type="checkbox" id="requireInteraction"><span class="label-text">Keep the notification on screen until dismissed
+      <span class="hint">Off means it fades after a few seconds and is easy to miss.</span></span></label>
+    <label><input type="checkbox" id="sound"><span class="label-text">Play a sound
+      <span class="hint">Needs the Tower page to have been clicked at least once, per browser autoplay rules.</span></span></label>
+    <label><input type="checkbox" id="flashTitle"><span class="label-text">Flash the tab title
+      <span class="hint">Only applies when Tower is open in its own tab, not embedded in Canvas.</span></span></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Focus</legend>
+    <label><input type="checkbox" id="focusTab"><span class="label-text">Jump to the Tower tab automatically
+      <span class="hint">Pulls you out of whatever you are doing. Off by default; clicking the notification always works.</span></span></label>
+  </fieldset>
+
+  <footer>
+    <button id="test" type="button">Send a test alert</button>
+    <span id="status" role="status" aria-live="polite"></span>
+  </footer>
+
+  <script src="options.js"></script>
+</body>
+</html>
