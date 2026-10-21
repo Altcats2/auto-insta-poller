@@ -93,11 +93,13 @@
     if (!id || seen.has(id)) return;
     seen.add(id);
     send({ type: 'poll', id, source, url: location.href });
-    chrome.storage.sync.get({ sound: true, flashTitle: true }, (opts) => {
-      if (chrome.runtime.lastError) return;
-      if (opts.sound) beep();
-      if (opts.flashTitle) flashTitle();
-    });
+    try {
+      chrome.storage.sync.get({ sound: true, flashTitle: true }, (opts) => {
+        if (chrome.runtime.lastError) return;
+        if (opts.sound) beep();
+        if (opts.flashTitle) flashTitle();
+      });
+    } catch (_) { /* extension reloaded out from under the page */ }
   }
 
   function describe(id, prompt, choices) {
